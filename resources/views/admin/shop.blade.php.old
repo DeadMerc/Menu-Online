@@ -1,0 +1,58 @@
+@extends('admin.header')
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+            <li class="active">Icons</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Shops</h1>
+        </div> 
+    </div><!--/.row--> 
+
+
+    <div class="row mainRow ">
+        
+
+        <table class="">
+            <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+  </div>
+            @if(isset($item->id))
+            {!! Form::model($item, ['id'=>'shopTableAdd','method'=>'PUT','route' => array('api.shops.update', $item->id)]) !!}
+            {!! Form::hidden('id', $item->id) !!}
+            @else
+            {!! Form::open(['id'=>'shopTableAdd','method' => 'POST', 'action' => 'ShopsController@store']) !!}
+            @endif
+            <tr ><td>{!! Form::label('category_id', 'Category') !!}<br>
+                    {!! Form::select('category_id',$categories,null,array('placeholder'=>'Category_id')) !!}</td></tr>
+            <tr><td>{!! Form::label('city_id', 'City') !!}<br>
+                    {!! Form::select('city_id',$cities,null,array('placeholder'=>'City_id')) !!}</td></tr>
+            <tr><td>{!! Form::label('title', 'Title') !!}<br>
+                    {!! Form::textarea('title',null,array('placeholder'=>'Title')) !!}</td></tr>
+            <tr><td>{!! Form::label('description', 'Description') !!}<br>
+                    {!! Form::textarea('description',null,array('placeholder'=>'Description')) !!}</td></tr>
+            <tr><td>{!! Form::label('time', 'Time work shop') !!}<br>
+                    {!! Form::text('time',null,array('placeholder'=>'Time work shop')) !!}</td></tr>
+            <tr><td>{!! Form::label('street', 'Street') !!}<br>
+                    {!! Form::text('street',null,array('placeholder'=>'Street')) !!}</td></tr>
+            <tr><td>{!! Form::label('date_start', 'Date start event') !!}<br>
+                    {!! Form::date('date_start') !!}</td></tr>
+            <tr><td>{!! Form::label('date stop event', 'Date stop event') !!}<br>
+                    {!! Form::date('date_stop') !!}</td></tr>
+            <tr> <td>{!! Form::file('image') !!}</td></tr>
+            @if(isset($item->id))
+            <tr> <td>{!! Form::submit('Update', ['class' => 'btn btn-info']) !!}</td></tr>
+            @else
+            <tr> <td>{!! Form::submit('Store', ['class' => 'btn btn-info']) !!}</td></tr>
+            @endif
+
+            {!! Form::close() !!}
+        </table>             
+    </div><!--/.row-->
+</div>	<!--/.main-->
+@extends('admin.footer')
