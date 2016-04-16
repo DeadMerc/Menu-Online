@@ -35,12 +35,12 @@
                     <td>{{ $item->id }} </td>
                     <td><img height="100px" width="300px" src="/images/{{$item->image }}"></td>
                     <td>{{ $item->url }}</td>
-                    <td>{{ $item->shop->title }}</td>
+                    <td>{{ $item->shop->title or 'Магазин не установлен'}}</td>
                     <td >
                         <a style="float: left" href="/admin/promo/{{$item->id}}" class="btn btn-info">Редактировать</a>
                         {!! Form::open(['method'=>'DELETE','action' => array('PromosController@destroy', $item->id),'style'=>'float:left;']) !!}
                         {!! Form::hidden('id', $item->id) !!}
-                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger','onclick'=>'confirm("Вы действительно хотите удалить?");']) !!}
+                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger','']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

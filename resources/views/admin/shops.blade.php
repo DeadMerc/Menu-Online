@@ -34,25 +34,25 @@
             <tbody>
 
                 <?php
-                //var_dump($shops);
+                //var_dump($shops);die;
                 ?>
                 @foreach($shops as $item)
                 <tr >
                     <td>{{ $item->id }} </td>
-                    <td>{{ $item->category->name }}</td>
-                    @if(!$item->photos->isEmpty())
-                    
+                    <td>{{ $item->category->name or 'Связь нарушена' }}</td>
+                    @if(1 != 1)
                     <td><img height="100px" width="300px" src="/images/{{$item->photos[0]->image }}"></td>
                     @else
-                         <td>Not found image</td>
+                         <td>Временно недоступно</td>
                     @endif
-                    <td>{{ $item->city->name }}</td>
+                    
+                    <td>{{ $item->city->name or 'Связь нарушена' }}</td>
                     <td>{{ $item->title }}</td>
                     <td >
                         <a style="float: left" href="/admin/shop/{{$item->id}}" class="btn btn-info">Редактировать</a>
                         {!! Form::open(['method'=>'DELETE','action' => array('ShopsController@destroy', $item->id),'style'=>'float:left;']) !!}
                         {!! Form::hidden('id', $item->id) !!}
-                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger','onclick'=>'confirm("Вы действительно хотите удалить?");']) !!}
+                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger','']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

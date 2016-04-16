@@ -22,8 +22,8 @@
         {!! Form::open(['id'=>'categoryTableAdd','method' => 'POST', 'action' => 'CategoriesController@store']) !!}
         @endif
         <div class="form-group">
-            {!! Form::label('category_id', 'Category parent') !!}
-            {!! Form::select('category_id',$parents,null,array('class'=>'form-control','placeholder'=>'Category_id')) !!}
+            {!! Form::label('parent_id', 'Category parent') !!}
+            {!! Form::select('parent_id',$parents,null,array('class'=>'form-control','placeholder'=>'Category_id')) !!}
         </div>
         <div class="form-group">
             {!! Form::label('Name', 'Title') !!}

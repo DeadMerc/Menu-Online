@@ -1,3 +1,10 @@
+$(".btn-danger").click(function(event){
+    var realy = confirm("Вы действительно хотите удалить?");
+    if(realy == false){
+        event.preventDefault();
+    }
+});
+
 
 $("#shopTableAdd").submit(function (event) {
     event.preventDefault();

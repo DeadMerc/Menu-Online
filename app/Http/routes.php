@@ -55,19 +55,22 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.verybasic'), funct
 
     Route::get('/promos', 'PromosController@showAll');
     Route::get('/promo/{id?}', 'PromosController@edit');
-    
-    Route::get('/news','NewsController@showAll');
-    Route::get('/new/{id?}','NewsController@edit');
+
+    Route::get('/news', 'NewsController@showAll');
+    Route::get('/new/{id?}', 'NewsController@edit');
 });
 
 Route::get('images/{filename}', function ($filename) {
     $path = storage_path() . '/app/public/images/' . $filename;
+    if(file_exists($path)) {
+        $file = File::get($path);
+        $type = File::mimeType($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+    }else{
+        $response = array('error'=>true,'message'=>'not found image');
+    }
 
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
 
     return $response;
 });

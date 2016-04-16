@@ -28,7 +28,7 @@ class NewsController extends Controller {
         }
     }
     public function show($id) {
-        return $this->helpReturn(News::find($id));
+        return $this->helpReturn(News::findorfail($id));
     }
 
     /**
@@ -100,7 +100,7 @@ class NewsController extends Controller {
             $cities[$city->id] = $city->name;
         }
         if($id) {
-            $data = array('item' => News::find($id));
+            $data = array('item' => News::findorfail($id));
         } else {
             $data = array('item' => '');
         }
@@ -125,7 +125,7 @@ class NewsController extends Controller {
             'description' => 'required','date'=>'required'];
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $news = News::find($id);
+            $news = News::findorfail($id);
             if($news) {
                 $news->title = $request->title;
                 $news->city_id = $request->city_id;
@@ -155,7 +155,7 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $news = News::find($id);
+        $news = News::findorfail($id);
         $news->delete();
         return redirect('/admin/news');
     }

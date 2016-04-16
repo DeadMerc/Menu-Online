@@ -48,7 +48,7 @@ class EventsController extends Controller {
     }
 
     public function show($id) {
-        return $this->helpReturn(Event::find($id));
+        return $this->helpReturn(Event::findorfail($id));
     }
 
     public function showAll() {
@@ -102,7 +102,7 @@ class EventsController extends Controller {
             foreach($users as $user) {
                 $message['message'] = $request->title;
                 $message['image'] = $event->image;
-                $debug[] = $this->sendPushToUser(User::find($user->user_id), $message);
+                $debug[] = $this->sendPushToUser(User::findorfail($user->user_id), $message);
             }
 
             return $this->helpInfo($debug);
@@ -132,7 +132,7 @@ class EventsController extends Controller {
         }
 
         if($id) {
-            $data = ['item' => Event::find($id)];
+            $data = ['item' => Event::findorfail($id)];
         } else {
             $data = ['item' => ''];
         }
@@ -166,7 +166,7 @@ class EventsController extends Controller {
         $request->dateStop = urldecode($request->dateStop);
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $event = Event::find($id);
+            $event = Event::findorfail($id);
             if($event) {
                 $event->category_id = $request->category_id;
                 $event->title = $request->title;

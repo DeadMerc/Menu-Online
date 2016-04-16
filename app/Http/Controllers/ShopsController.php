@@ -41,7 +41,7 @@ class ShopsController extends Controller {
     }
 
     public function show($id) {
-        return $this->helpReturn(Shop::with('photos')->with('reviews')->find($id));
+        return $this->helpReturn(Shop::with('photos')->with('reviews')->findorfail($id));
     }
 
     public function edit($id = false) {
@@ -55,7 +55,7 @@ class ShopsController extends Controller {
         }
 
         if($id) {
-            $data = array('item' => Shop::find($id));
+            $data = array('item' => Shop::findorfail($id));
         } else {
             $data = array('item' => '');
         }
@@ -154,7 +154,7 @@ class ShopsController extends Controller {
             'phone' => 'required', 'lat' => 'required', 'lon' => 'required');
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $shop = Shop::find($id);
+            $shop = Shop::findorfail($id);
             if($shop) {
                 $shop->category_id = $request->category_id;
                 $shop->city_id = $request->city_id;

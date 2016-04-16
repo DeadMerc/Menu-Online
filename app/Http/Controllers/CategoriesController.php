@@ -62,7 +62,7 @@ class CategoriesController extends Controller {
      * @apiParam {integer} id
      */
     public function childrens($id) {
-        $childrens = Category::find($id)->childrens;
+        $childrens = Category::findorfail($id)->childrens;
         return $this->helpReturn($childrens);
     }
 
@@ -75,7 +75,7 @@ class CategoriesController extends Controller {
      * @apiParam {integer} [id]
      */
     public function events($id) {
-        $events = Category::find($id)->events;
+        $events = Category::findorfail($id)->events;
         return $this->helpReturn($events);
     }
 
@@ -91,15 +91,15 @@ class CategoriesController extends Controller {
     public function shops(Request $request,$id) {
         $city_id = $request->header('city_id');
         if($city_id){
-            $shops = Category::find($id)->shops->where('city_id',$city_id);
+            $shops = Category::findorfail($id)->shops->where('city_id',$city_id);
         }else{
-            $shops = Category::find($id)->shops;
+            $shops = Category::findorfail($id)->shops;
         }
         return $this->helpReturn($shops);
     }
 
     public function show($id) {
-        return $this->helpReturn(Category::find($id));
+        return $this->helpReturn(Category::findorfail($id));
     }
 
     public function edit($id = FALSE) {
@@ -109,7 +109,7 @@ class CategoriesController extends Controller {
         }
 
         if($id) {
-            $data = array('item' => Category::find($id));
+            $data = array('item' => Category::findorfail($id));
         } else {
             $data = array('item' => '');
         }
@@ -165,7 +165,7 @@ class CategoriesController extends Controller {
         $rules = array('name' => 'required');
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $category = Category::find($id);
+            $category = Category::findorfail($id);
             if($category) {
                 if(!$request->parent_id) {
                     $request->parent_id = 0;
@@ -194,7 +194,7 @@ class CategoriesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $item = Category::find($id);
+        $item = Category::findorfail($id);
         $item->delete();
         return redirect('/admin/categories');
     }

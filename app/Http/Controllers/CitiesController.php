@@ -22,7 +22,7 @@ class CitiesController extends Controller {
     }
     
     public function show($id) {
-        return $this->helpReturn(City::find($id));
+        return $this->helpReturn(City::findorfail($id));
     }
 
     /**
@@ -58,7 +58,7 @@ class CitiesController extends Controller {
         $rules = array('name' => 'required');
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $city = City::find($id);
+            $city = City::findorfail($id);
             if($city) {
                 $city->name = $request->name;
                 $city->save();

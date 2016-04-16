@@ -42,7 +42,7 @@
                         <a style="float: left" href="/admin/new/{{$item->id}}" class="btn btn-info">Редактировать</a>
                         {!! Form::open(['method'=>'DELETE','action' => array('NewsController@destroy', $item->id),'style'=>'float:left;']) !!}
                         {!! Form::hidden('id', $item->id) !!}
-                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger','onclick'=>'confirm("Вы действительно хотите удалить?");']) !!}
+                        {!! Form::submit('Удалить', ['class' => 'btn btn-danger','']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

@@ -64,7 +64,7 @@ class UsersController extends Controller {
      * 
      */
     public function show($id) {
-        return $this->helpReturn(User::find($id));
+        return $this->helpReturn(User::findorfail($id));
     }
 
     /**
@@ -90,7 +90,7 @@ class UsersController extends Controller {
         $rules = array('type' => 'required', 'token' => 'required');
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $user = User::find($id);
+            $user = User::findorfail($id);
             if($user) {
                 $user->deviceType = $request->type;
                 $user->deviceToken = $request->token;

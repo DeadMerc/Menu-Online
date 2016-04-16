@@ -22,7 +22,7 @@ class AdminController extends Controller {
         $counts['events'] = $counts['events']->count();
 
         $counts['reviews'] = Review::all()->count();
-        $counts['views'] = Stat::find(1)->views;
+        $counts['views'] = Stat::findorfail(1)->views;
         //count users every month
         $counts['line_users'] = array();
         for($i = 1; $i <= 12; $i++) {

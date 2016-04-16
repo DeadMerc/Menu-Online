@@ -27,13 +27,13 @@ class ReviewsController extends Controller {
     }
     
     public function publish($id) {
-        $reviews = Review::find($id);
+        $reviews = Review::findorfail($id);
         $reviews->publish = 1;
         $reviews->save();
         return $this->helpInfo();
     }
     public function unpublish($id) {
-        $reviews = Review::find($id);
+        $reviews = Review::findorfail($id);
         $reviews->publish = 0;
         $reviews->save();
         return $this->helpInfo();
@@ -46,7 +46,7 @@ class ReviewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        return $this->helpReturn(Review::find($id));
+        return $this->helpReturn(Review::findorfail($id));
     }
 
     /**
@@ -103,7 +103,7 @@ class ReviewsController extends Controller {
      */
     public function edit($id = FALSE) {
         if($id) {
-            $data = array('item' => Review::find($id));
+            $data = array('item' => Review::findorfail($id));
         } else {
             $data = array('item' => '');
         }
@@ -131,7 +131,7 @@ class ReviewsController extends Controller {
         if(!$valid->fails()) {
             $review = Review::where('user_id', '=', $request->user_id)
                     ->where('shop_id', '=', $request->shop_id)->first();
-            $review_inDB = Review::find($id);
+            $review_inDB = Review::findorfail($id);
             
             if(($review AND $review_inDB) AND $review->id === $review_inDB->id) {
                 $review->name = $request->name;

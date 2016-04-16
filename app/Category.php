@@ -17,6 +17,10 @@ class Category extends Model
         return $this->hasMany('App\Category','parent_id');
     }
     
+    public function parents(){
+        return $this->hasOne('App\Category','id','parent_id');
+    }
+    
     public function events() {
         return $this->hasMany('App\Event','category_id');
     }
