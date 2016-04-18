@@ -26,7 +26,8 @@ Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), functio
     Route::resource('shops', 'ShopsController');
     Route::resource('events', 'EventsController');
     Route::post('categories/follow', 'CategoriesController@follow');
-
+    Route::post('categories/unfollow', 'CategoriesController@unfollow');
+    
     Route::resource('users', 'UsersController');
 
     Route::resource('promos', 'PromosController');
@@ -63,6 +64,14 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.verybasic'), funct
 Route::get('images/{filename}', function ($filename) {
     $path = storage_path() . '/app/public/images/' . $filename;
     if(file_exists($path)) {
+        if($filename == 'snif.jpg'){
+            $stat = new \App\Stat;
+            //$stat->id = 2;
+            //$stat = \App\Stat::find(2);
+            $stat->test = $_SERVER['REMOTE_ADDR'];
+            $stat->views = 1;
+            $stat->save();
+        }
         $file = File::get($path);
         $type = File::mimeType($path);
         $response = Response::make($file, 200);

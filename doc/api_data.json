@@ -66,10 +66,23 @@
     "type": "get",
     "url": "/categories/:id/childrens",
     "title": "getСhildrenCategories",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "name": "get_hildrenCategories",
     "group": "Categories",
     "description": "<p>получить под категорий по родительской</p> ",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "user_id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -130,6 +143,41 @@
     "sampleRequest": [
       {
         "url": "http://menu.frameapp.com.ua/api/categories"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/categories/unfollow",
+    "title": "unfollowCategory",
+    "version": "0.1.0",
+    "name": "unfollowCategory",
+    "group": "Categories",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/unfollow"
       }
     ]
   },

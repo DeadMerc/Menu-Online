@@ -42,27 +42,73 @@ class CategoriesController extends Controller {
         $rules = array('user_id' => 'required', 'category_id' => 'required');
         $valid = Validator($request->all(), $rules);
         if(!$valid->fails()) {
-            $follow = new Category_follow;
-            $follow->user_id = $request->user_id;
-            $follow->category_id = $request->category_id;
-            $follow->save();
+            $follow = Category_follow::where('user_id', '=', $request->user_id)
+                    ->where('category_id', '=', $request->category_id)
+                    ->get();
+            if($follow->isEmpty()) {
+                $follow = new Category_follow;
+                $follow->user_id = $request->user_id;
+                $follow->category_id = $request->category_id;
+                $follow->save();
+            }
             return $this->helpInfo();
         } else {
             return $this->helpError('valid', $valid);
         }
     }
+    /**
+     * @api {post} /categories/unfollow unfollowCategory
+     * @apiVersion 0.1.0
+     * @apiName unfollowCategory
+     * @apiGroup Categories
+     * 
+     * @apiParam {integer} user_id
+     * @apiParam {integer} category_id
+     */
+    public function unfollow(Request $request) {
+        $rules = array('user_id' => 'required', 'category_id' => 'required');
+        $valid = Validator($request->all(), $rules);
+        if(!$valid->fails()) {
+            $follow = Category_follow::where('user_id', '=', $request->user_id)
+                    ->where('category_id', '=', $request->category_id)
+                    ->delete();
+            /*
+            var_dump($follow);
+            if(!$follow->isEmpty()){
+                $follow->delete();
+            }*/
+            return $this->helpInfo();
+        } else {
+            return $this->helpError('valid', $valid);
+        }
+        
+    }
 
     /**
      * @api {get} /categories/:id/childrens getСhildrenCategories
-     * @apiVersion 0.1.1
+     * @apiVersion 0.1.2
      * @apiName getСhildrenCategories
      * @apiGroup Categories
      * @apiDescription получить под категорий по родительской
      * 
+     * @apiHeader {integer} [user_id]
      * @apiParam {integer} id
      */
-    public function childrens($id) {
+    public function childrens(Request $request, $id) {
         $childrens = Category::findorfail($id)->childrens;
+        if($request->header('user_id')) {
+            foreach($childrens as $children) {
+                $follow = Category_follow::where('user_id', '=', $request->header('user_id'))
+                        ->where('category_id', '=', $children->id)
+                        ->get();
+                //var_dump($follow);
+                if(!$follow->isEmpty()) {
+                    $children->user_follow = true;
+                } else {
+                    $children->user_follow = false;
+                }
+            }
+        }
         return $this->helpReturn($childrens);
     }
 
@@ -88,11 +134,11 @@ class CategoriesController extends Controller {
      * @apiHeader {integer} city_id
      * @apiParam {integer} id
      */
-    public function shops(Request $request,$id) {
+    public function shops(Request $request, $id) {
         $city_id = $request->header('city_id');
-        if($city_id){
-            $shops = Category::findorfail($id)->shops->where('city_id',$city_id);
-        }else{
+        if($city_id) {
+            $shops = Category::findorfail($id)->shops->where('city_id', $city_id);
+        } else {
             $shops = Category::findorfail($id)->shops;
         }
         return $this->helpReturn($shops);
