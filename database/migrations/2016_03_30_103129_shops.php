@@ -20,6 +20,7 @@ class Shops extends Migration
             $table->string('description');
             $table->string('time');
             $table->string('street');
+            $table->string('url')->nullable();
             
             $table->string('lat');
             $table->string('lon');
@@ -39,6 +40,6 @@ class Shops extends Migration
      */
     public function down()
     {
-        Schema::drop('shops');
+        Schema::dropIfExists('shops');
     }
 }

@@ -30,6 +30,6 @@ class Promos extends Migration
      */
     public function down()
     {
-        Schema::drop('promos');
+        Schema::dropIfExists('promos');
     }
 }

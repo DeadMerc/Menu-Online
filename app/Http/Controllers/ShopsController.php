@@ -77,6 +77,7 @@ class ShopsController extends Controller {
      * @apiParam {string} street Улица
      * @apiParam {string} lat
      * @apiParam {string} lon
+     * @apiParam {string} url
      * @apiParam {datetime} date_start
      * @apiParam {datetime} date_stop
      * @apiParam {file} image
@@ -101,6 +102,7 @@ class ShopsController extends Controller {
             $shop->lat = $request->lat;
             $shop->lon = $request->lon;
             $shop->phone = $request->phone;
+            $shop->url = $request->url;
             $shop->save();
             if(is_array($request->images)) {
                 foreach($request->images as $image) {
@@ -142,6 +144,7 @@ class ShopsController extends Controller {
      * @apiParam {string} street Улица
      * @apiParam {string} lat
      * @apiParam {string} lon
+     * @apiParam {string} url
      * @apiParam {datetime} date_start
      * @apiParam {datetime} date_stop
      * @apiParam {file} image
@@ -167,6 +170,7 @@ class ShopsController extends Controller {
                 $shop->date_stop = $request->date_stop;
                 $shop->description = $request->description;
                 $shop->phone = $request->phone;
+                $shop->url = $request->url;
                 $shop->save();
 
                 if(is_array($request->images)) {

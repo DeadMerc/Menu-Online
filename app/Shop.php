@@ -24,6 +24,7 @@ class Shop extends Model {
     public function reviews() {
         return $this->hasMany('App\Review');
     }
+    
 
     public function getRatingAttribute() {
         $data['sum'] = $this->hasMany('App\Review', 'shop_id', 'id');

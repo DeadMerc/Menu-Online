@@ -27,6 +27,6 @@ class CategoriesFollow extends Migration
      */
     public function down()
     {
-        Schema::drop('categories_follow');
+        Schema::dropIfExists('categories_follow');
     }
 }

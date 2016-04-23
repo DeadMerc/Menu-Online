@@ -8,6 +8,8 @@ use App\Category;
 use App\City;
 use App\Category_follow;
 use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
+use Cache;
 
 class CategoriesController extends Controller {
 
@@ -56,6 +58,7 @@ class CategoriesController extends Controller {
             return $this->helpError('valid', $valid);
         }
     }
+
     /**
      * @api {post} /categories/unfollow unfollowCategory
      * @apiVersion 0.1.0
@@ -73,15 +76,14 @@ class CategoriesController extends Controller {
                     ->where('category_id', '=', $request->category_id)
                     ->delete();
             /*
-            var_dump($follow);
-            if(!$follow->isEmpty()){
-                $follow->delete();
-            }*/
+              var_dump($follow);
+              if(!$follow->isEmpty()){
+              $follow->delete();
+              } */
             return $this->helpInfo();
         } else {
             return $this->helpError('valid', $valid);
         }
-        
     }
 
     /**
@@ -141,6 +143,7 @@ class CategoriesController extends Controller {
         } else {
             $shops = Category::findorfail($id)->shops;
         }
+        
         return $this->helpReturn($shops);
     }
 

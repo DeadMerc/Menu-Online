@@ -1085,6 +1085,13 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "url",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
             "type": "<p>datetime</p> ",
             "optional": false,
             "field": "date_start",
@@ -1172,6 +1179,13 @@ define({ "api": [
             "type": "<p>string</p> ",
             "optional": false,
             "field": "lon",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "url",
             "description": ""
           },
           {

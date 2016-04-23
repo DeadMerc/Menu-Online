@@ -37,6 +37,23 @@ class Controller extends BaseController {
 
         return $arrayForResponse;
     }
+    
+    public static function helpReturnS($response, $info = false, $message = false) {
+        $arrayForResponse['response'] = $response;
+        if($info) {
+            $arrayForResponse['info'] = $info;
+        }
+        if($message) {
+            $arrayForResponse['message'] = $message;
+        }
+        $arrayForResponse['error'] = false;
+        if(!$response) {
+            $arrayForResponse['error'] = true;
+            $arrayForResponse['message'] = 'Resource not found';
+        }
+
+        return $arrayForResponse;
+    }
 
     public function helpInfo($message = false) {
         if($message) {
