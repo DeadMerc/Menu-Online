@@ -27,6 +27,7 @@ class ShopsController extends Controller {
         if($city_id) {
             return $this->helpReturn(Shop::with('photos')
                                     ->with('reviews')
+                                    ->with('category')
                                     ->where('date_start', '<=', Carbon::today()->toDateString())
                                     ->where('date_stop', '>=', Carbon::today()->toDateString())
                                     ->where('city_id', '=', $city_id)
@@ -34,6 +35,7 @@ class ShopsController extends Controller {
         } else {
             return $this->helpReturn(Shop::with('photos')
                                     ->with('reviews')
+                                    ->with('category')
                                     ->where('date_start', '<=', Carbon::today()->toDateString())
                                     ->where('date_stop', '>=', Carbon::today()->toDateString())
                                     ->get(), null, 'with out city_id');
