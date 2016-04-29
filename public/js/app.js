@@ -25,7 +25,7 @@ function getChildCategory(category) {
 }
 
 
-//to select
+//to select 
 function getShopsByCategoryToSelect(category) {
     //console.log(category.val());
     $.get('/api/categories/' + category.val() + '/shops_global', function (res) {
