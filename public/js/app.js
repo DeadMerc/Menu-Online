@@ -25,7 +25,7 @@ function getChildCategory(category) {
 }
 
 
-//to select 
+//to select
 function getShopsByCategoryToSelect(category) {
     //console.log(category.val());
     $.get('/api/categories/' + category.val() + '/shops_global', function (res) {
@@ -36,7 +36,7 @@ function getShopsByCategoryToSelect(category) {
         } else if (res.error !== false) {
             showDanger('Непредвиденная ошибка');
         } else {
-            var options = '<option selected disabled>Выберите подкатегорию</option>';
+            var options = '<option selected disabled>Выберите заведение</option>';
             $.each(res.response, function (i, v) {
                 options += '<option value="' + v.id + '">' + v.title + '</option> ';
             });
