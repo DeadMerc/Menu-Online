@@ -96,7 +96,7 @@ class EventsController extends Controller {
                 $event->image = null;
             }
             $event->save();
-            //send push with info
+            //send push with info, new branch
             $users = Category_follow::where('category_id', '=', $request->category_id)->get();
             $debug = [];
             foreach($users as $user) {
