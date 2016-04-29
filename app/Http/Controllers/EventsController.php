@@ -103,6 +103,7 @@ class EventsController extends Controller {
                 $message['message'] = $request->title;
                 $message['image'] = $event->image;
                 $message['shop_id'] = $event->shop_id;
+                $message['description'] = $event->description;
                 $debug[] = $this->sendPushToUser(User::findorfail($user->user_id), $message);
             }
 
