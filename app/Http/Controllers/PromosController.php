@@ -8,21 +8,19 @@ use App\Shop;
 use App\Http\Requests;
 use App\City;
 
-class PromosController extends Controller
-{
+class PromosController extends Controller {
 
     /**
      * @api {get} /promos/:id getPromos
      * @apiVersion 0.1.0
      * @apiName getPromos
      * @apiGroup Promos
-     *
+     * 
      * @apiParam {integer} [id]
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $city_id = $request->header('city_id');
-        if ($city_id) {
+        if($city_id) {
             $promos = Promo::where('city_id', '=', $city_id)->get();
         } else {
             $promos = Promo::all();
@@ -33,16 +31,14 @@ class PromosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         return $this->helpReturn(Promo::findorfail($id));
     }
 
-    public function showAll()
-    {
+    public function showAll() {
         $promos = Promo::all();
         return view('admin.promos', ['promos' => $promos]);
     }
@@ -52,8 +48,7 @@ class PromosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -62,14 +57,13 @@ class PromosController extends Controller
      * @apiVersion 0.1.0
      * @apiName storePromos
      * @apiGroup Promos
-     *
+     * 
      * @apiParam {file} image
      * @apiParam {string} [shop_id]
      * @apiParam {string} [url]
      */
-    public function store(Request $request)
-    {
-        if ($request->hasFile('image')) {
+    public function store(Request $request) {
+        if($request->hasFile('image')) {
             $fileName = md5(rand(999, 9999) . date('d m Y')) . '.jpg';
             $request->file('image')->move(storage_path() . '/app/public/images', $fileName);
             $promo = new Promo;
@@ -87,20 +81,19 @@ class PromosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id = false)
-    {
+    public function edit($id = false) {
         $shops = ['0' => 'Заведение не установлено'];
-        foreach (Shop::all() as $shop) {
+        foreach(Shop::all() as $shop) {
             $shops[$shop->id] = $shop->title;
         }
         $cities = [];
-        foreach (City::all() as $city) {
+        foreach(City::all() as $city) {
             $cities[$city->id] = $city->name;
         }
-        if ($id) {
+        if($id) {
             $data = ['item' => Promo::findorfail($id)];
         } else {
             $data = ['item' => ''];
@@ -115,18 +108,17 @@ class PromosController extends Controller
      * @apiVersion 0.1.0
      * @apiName updatePromos
      * @apiGroup Promos
-     *
+     * 
      * @apiParam {file} image
      * @apiParam {string} [shop_id]
      * @apiParam {string} [url]
      */
-    public function update(Request $request, $id)
-    {
-        if ($request->hasFile('image')) {
+    public function update(Request $request, $id) {
+        if($request->hasFile('image')) {
             $fileName = md5(rand(999, 9999) . date('d m Y')) . '.jpg';
             $request->file('image')->move(storage_path() . '/app/public/images', $fileName);
             $promo = Promo::findorfail($id);
-            if ($promo) {
+            if($promo) {
                 $promo->image = $fileName;
                 $promo->shop_id = $request->shop_id;
                 $promo->url = $request->url;
@@ -144,11 +136,10 @@ class PromosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $promo = Promo::findorfail($id);
         $promo->delete();
         return redirect('/admin/promos');

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use StatsTableSeeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**

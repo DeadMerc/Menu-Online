@@ -15,8 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Carbon\Carbon;
 use App\Category_follow;
 
-class EventsController extends Controller
-{
+class EventsController extends Controller {
     /**
      * @api {none} /none ВАЖНАЯ ИНФА
      * @apiVersion 0.1.0
@@ -33,31 +32,28 @@ class EventsController extends Controller
      * @apiHeader {integer} [city_id]
      * @apiParam {integer} [id]
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $city_id = $request->header('city_id');
-        if ($city_id) {
+        if($city_id) {
             return $this->helpReturn(Event::where('date_start', '<=', Carbon::today()->toDateString())
-                ->where('date_stop', '>=', Carbon::today()->toDateString())
-                ->where('city_id', '=', $city_id)
-                ->get());
+                                ->where('date_stop', '>=', Carbon::today()->toDateString())
+                                ->where('city_id','=',$city_id)
+                                ->get());
         } else {
             return $this->helpReturn(Event::where('date_start', '<=', Carbon::today()->toDateString())
-                ->where('date_stop', '>=', Carbon::today()->toDateString())
-                ->get());
+                                ->where('date_stop', '>=', Carbon::today()->toDateString())
+                                ->get());
         }
-
+        
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         return $this->helpReturn(Event::findorfail($id));
     }
 
-    public function showAll()
-    {
+    public function showAll() {
         $events = Event::all();
-        return view('admin.events', array('events' => $events));
+        return view('admin.events', array('events' =>$events));
     }
 
     /**
@@ -65,7 +61,7 @@ class EventsController extends Controller
      * @apiVersion 0.1.0
      * @apiName storeEvents
      * @apiGroup Events
-     *
+     * 
      * @apiParam {integer} category_id
      * @apiParam {string} title
      * @apiParam {string} description
@@ -73,18 +69,17 @@ class EventsController extends Controller
      * @apiParam {datetime} dateStop
      * @apiParam {integer} publish
      * @apiParam {file} image
-     *
+     * 
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $rules = array('category_id' => 'required', 'title' => 'required',
             'description' => 'required', 'date_start' => 'required', 'date_stop' => 'required',
-            'shop_id' => 'required', 'city_id' => 'required', 'shop_id' => 'required');
+            'shop_id' => 'required', 'city_id' => 'required','shop_id'=>'required');
 
         $request->dateStart = urldecode($request->dateStart);
         $request->dateStop = urldecode($request->dateStop);
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $event = new Event;
             $event->category_id = $request->category_id;
             $event->title = $request->title;
@@ -93,7 +88,7 @@ class EventsController extends Controller
             $event->date_stop = $request->date_stop;
             $event->shop_id = $request->shop_id;
             $event->city_id = $request->city_id;
-            if ($request->hasFile('image')) {
+            if($request->hasFile('image')) {
                 $fileName = md5($event->title . date('d m Y') . $event->dateStop) . '.jpg';
                 $request->file('image')->move(storage_path() . '/app/public/images', $fileName);
                 $event->image = $fileName;
@@ -104,7 +99,7 @@ class EventsController extends Controller
             //send push
             $users = Category_follow::where('category_id', '=', $request->category_id)->get();
             $debug = [];
-            foreach ($users as $user) {
+            foreach($users as $user) {
                 $message['message'] = $request->title;
                 $message['image'] = $event->image;
                 $message['shop_id'] = $event->shop_id;
@@ -120,13 +115,12 @@ class EventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id = false)
-    {
+    public function edit($id = false) {
         $shops = [];
-        foreach (Shop::all() as $shop) {
+        foreach(Shop::all() as $shop) {
             $shops[$shop->id] = $shop->title;
         }
         /*
@@ -136,11 +130,11 @@ class EventsController extends Controller
         }*/
         $categories = $this->getCategoriesForHtml();
         $cities = [];
-        foreach (City::all() as $city) {
+        foreach(City::all() as $city) {
             $cities[$city->id] = $city->name;
         }
 
-        if ($id) {
+        if($id) {
             $data = ['item' => Event::findorfail($id)];
         } else {
             $data = ['item' => ''];
@@ -156,7 +150,7 @@ class EventsController extends Controller
      * @apiVersion 0.1.0
      * @apiName updateEvents
      * @apiGroup Events
-     *
+     * 
      * @apiParam {integer} category_id
      * @apiParam {string} title
      * @apiParam {string} description
@@ -164,20 +158,19 @@ class EventsController extends Controller
      * @apiParam {datetime} dateStop
      * @apiParam {integer} publish
      * @apiParam {file} image
-     *
+     * 
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $rules = array('category_id' => 'required', 'title' => 'required',
             'description' => 'required', 'date_start' => 'required', 'date_stop' => 'required',
-            'shop_id' => 'required', 'city_id' => 'required', 'shop_id' => 'required');
+            'shop_id' => 'required', 'city_id' => 'required','shop_id'=>'required');
 
         $request->dateStart = urldecode($request->dateStart);
         $request->dateStop = urldecode($request->dateStop);
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $event = Event::findorfail($id);
-            if ($event) {
+            if($event) {
                 $event->category_id = $request->category_id;
                 $event->title = $request->title;
                 $event->description = $request->description;
@@ -185,7 +178,7 @@ class EventsController extends Controller
                 $event->date_stop = $request->date_stop;
                 $event->shop_id = $request->shop_id;
                 $event->city_id = $request->city_id;
-                if ($request->hasFile('image')) {
+                if($request->hasFile('image')) {
                     $fileName = md5($event->title . date('d m Y') . $event->dateStop) . '.jpg';
                     $request->file('image')->move(storage_path() . '/app/public/images', $fileName);
                     $event->image = $fileName;
@@ -206,11 +199,10 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $item = Event::findOrFail($id);
         $item->delete();
         return redirect('/admin/events');

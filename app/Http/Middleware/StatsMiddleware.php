@@ -8,19 +8,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\Response;
 use Cache;
 use Carbon\Carbon;
-
-class StatsMiddleware
-{
+class StatsMiddleware {
 
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
+    public function handle($request, Closure $next) {
         $stats = Stat::find(1);
         $stats->views++;
         $stats->save();
@@ -34,9 +31,8 @@ class StatsMiddleware
         }*/
         return $next($request);
     }
-
-    public function terminate($request, $response)
-    {
+    
+    public function terminate($request,$response) {
         /*
         $req = md5($request->fullUrl());
         if(!Cache::store('database')->has($req) AND $request->isMethod('get')) {

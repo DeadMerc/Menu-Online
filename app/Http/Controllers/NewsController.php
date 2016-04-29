@@ -7,31 +7,27 @@ use App\News;
 use App\City;
 use App\Http\Requests;
 
-class NewsController extends Controller
-{
+class NewsController extends Controller {
 
     /**
      * @api {get} /news/:id getNews
      * @apiVersion 0.1.0
      * @apiName getNews
      * @apiGroup News
-     *
+     * 
      * @apiHeader {integr} [city_id]
      * @apiParam {integer} [id]
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $city_id = $request->header('city_id');
-        if ($city_id) {
+        if($city_id) {
             return $this->helpReturn(News::where('city_id', '=', $city_id)
-                ->get());
+                                    ->get());
         } else {
             return $this->helpReturn(News::all());
         }
     }
-
-    public function show($id)
-    {
+    public function show($id) {
         return $this->helpReturn(News::findorfail($id));
     }
 
@@ -40,8 +36,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -50,25 +45,24 @@ class NewsController extends Controller
      * @apiVersion 0.1.0
      * @apiName storeNews
      * @apiGroup News
-     *
+     * 
      * @apiParam {integr} city_id
      * @apiParam {string} title
      * @apiParam {string} description
      * @apiParam {file} image
      * @apiParam {datetime} date
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $rules = ['city_id' => 'required', 'title' => 'required',
-            'description' => 'required', 'date' => 'required'];
+            'description' => 'required','date'=>'required'];
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $news = new News;
             $news->title = $request->title;
             $news->city_id = $request->city_id;
             $news->description = $request->description;
             $news->date = $request->date;
-            if ($request->hasFile('image')) {
+            if($request->hasFile('image')) {
                 $fileName = md5($news->title . date('d m Y')) . '.jpg';
                 $request->file('image')->move(storage_path() . '/app/public/images', $fileName);
                 $news->image = $fileName;
@@ -85,29 +79,27 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
-    public function showAll()
-    {
+    
+    
+    public function showAll() {
         return view('admin.news', array('news' => News::all()));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id = false)
-    {
+    public function edit($id = false) {
         $cities = [];
-        foreach (City::all() as $city) {
+        foreach(City::all() as $city) {
             $cities[$city->id] = $city->name;
         }
-        if ($id) {
+        if($id) {
             $data = array('item' => News::findorfail($id));
         } else {
             $data = array('item' => '');
@@ -121,26 +113,25 @@ class NewsController extends Controller
      * @apiVersion 0.1.0
      * @apiName updateNews
      * @apiGroup News
-     *
+     * 
      * @apiParam {integer} city_id
      * @apiParam {string} title
      * @apiParam {string} description
      * @apiParam {file} image
      * @apiParam {datetime} date
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $rules = ['city_id' => 'required', 'title' => 'required',
-            'description' => 'required', 'date' => 'required'];
+            'description' => 'required','date'=>'required'];
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $news = News::findorfail($id);
-            if ($news) {
+            if($news) {
                 $news->title = $request->title;
                 $news->city_id = $request->city_id;
                 $news->description = $request->description;
                 $news->date = $request->date;
-                if ($request->hasFile('image')) {
+                if($request->hasFile('image')) {
                     $fileName = md5($news->title . date('d m Y')) . '.jpg';
                     $request->file('image')->move(storage_path() . '/app/public/images', $fileName);
                     $news->image = $fileName;
@@ -160,11 +151,10 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $news = News::findorfail($id);
         $news->delete();
         return redirect('/admin/news');

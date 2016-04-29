@@ -9,33 +9,30 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Category;
 
-class Controller extends BaseController
-{
+class Controller extends BaseController {
 
     use AuthorizesRequests,
         DispatchesJobs,
         ValidatesRequests;
 
-    public function helpError($message, $validator = false)
-    {
+    public function helpError($message, $validator = false) {
 
-        if ($validator) {
+        if($validator) {
             return array('response' => [], 'error' => true, 'message' => $message, 'validator' => $validator->errors()->all());
         }
         return array('response' => [], 'error' => true, 'message' => $message);
     }
 
-    public function helpReturn($response, $info = false, $message = false)
-    {
+    public function helpReturn($response, $info = false, $message = false) {
         $arrayForResponse['response'] = $response;
-        if ($info) {
+        if($info) {
             $arrayForResponse['info'] = $info;
         }
-        if ($message) {
+        if($message) {
             $arrayForResponse['message'] = $message;
         }
         $arrayForResponse['error'] = false;
-        if (!$response) {
+        if(!$response) {
             $arrayForResponse['error'] = true;
             $arrayForResponse['message'] = 'Resource not found';
         }
@@ -43,17 +40,16 @@ class Controller extends BaseController
         return $arrayForResponse;
     }
 
-    public static function helpReturnS($response, $info = false, $message = false)
-    {
+    public static function helpReturnS($response, $info = false, $message = false) {
         $arrayForResponse['response'] = $response;
-        if ($info) {
+        if($info) {
             $arrayForResponse['info'] = $info;
         }
-        if ($message) {
+        if($message) {
             $arrayForResponse['message'] = $message;
         }
         $arrayForResponse['error'] = false;
-        if (!$response) {
+        if(!$response) {
             $arrayForResponse['error'] = true;
             $arrayForResponse['message'] = 'Resource not found';
         }
@@ -61,9 +57,8 @@ class Controller extends BaseController
         return $arrayForResponse;
     }
 
-    public function helpInfo($message = false)
-    {
-        if ($message) {
+    public function helpInfo($message = false) {
+        if($message) {
             $arrayForResponse['message'] = $message;
         }
         $arrayForResponse['response'] = [];
@@ -75,11 +70,10 @@ class Controller extends BaseController
      * @device_ids string sa
      * @message arrray message,type,id
      */
-    public function sendPushToAndroid(array $device_ids, $message = false)
-    {
-        if (!$message) {
+    public function sendPushToAndroid(array $device_ids, $message = false) {
+        if(!$message) {
             $message = array
-            (
+                (
                 'message' => 'here is a message. message',
                 'title' => 'This is a title. title',
                 'subtitle' => 'This is a subtitle. subtitle',
@@ -92,12 +86,12 @@ class Controller extends BaseController
         }
 
         $fields = array
-        (
+            (
             'registration_ids' => $device_ids,
             'data' => $message
         );
         $headers = array
-        (
+            (
             'Authorization: key=AIzaSyCJb8kzYjf6vTu1gyet0ZS_4v4MoiaqVEA',
             'Content-Type: application/json'
         );
@@ -114,8 +108,7 @@ class Controller extends BaseController
         return $result;
     }
 
-    public function sendPushToIos($device_ids = false, $message = false)
-    {
+    public function sendPushToIos($device_ids = false, $message = false) {
         $tHost = 'gateway.push.apple.com';
         $tPort = 2195;
         $errors = false;
@@ -138,11 +131,11 @@ class Controller extends BaseController
         stream_context_set_option($tContext, 'ssl', 'local_cert', $tCert);
         stream_context_set_option($tContext, 'ssl', 'passphrase', $tPassphrase);
         $tSocket = stream_socket_client('ssl://' . $tHost . ':' . $tPort, $error, $errstr, 30, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $tContext);
-        if (!$tSocket)
+        if(!$tSocket)
             $errors = 'Cant open socket';
         $tMsg = chr(0) . chr(0) . chr(32) . pack('H*', $tToken) . pack('n', strlen($tBody)) . $tBody;
         $tResult = fwrite($tSocket, $tMsg, strlen($tMsg));
-        if ($tResult)
+        if($tResult)
             $errors = false;
         else
             $errors = $tResult;
@@ -155,26 +148,24 @@ class Controller extends BaseController
      * @param message array=message,image
      */
 
-    public function sendPushToUser($user, $message)
-    {
-        if ($user->deviceType == 'android') {
+    public function sendPushToUser($user, $message) {
+        if($user->deviceType == 'android') {
             $response = $this->sendPushToAndroid(array($user->deviceToken), $message);
-        } elseif ($user->deviceType == 'ios') {
+        } elseif($user->deviceType == 'ios') {
             $response = $this->sendPushToIos(array($user->deviceToken), $message);
         } else {
             $response = false;
         }
         return $response;
     }
-
-    public function getCategoriesForHtml()
-    {
+    
+    public function getCategoriesForHtml() {
         $mainCategories = [];
-        foreach (Category::where('parent_id', '=', '0')->get() as $category) {
+        foreach(Category::where('parent_id','=','0')->get() as $category){
             $completeCategory = null;
             $completeCategory['main']['id'] = $category->id;
             $completeCategory['main']['name'] = $category->name;
-            foreach (Category::where('parent_id', '=', $category->id)->get() as $children) {
+            foreach(Category::where('parent_id','=',$category->id)->get() as $children) {
                 $toChildrens['id'] = $children->id;
                 $toChildrens['name'] = $children->name;
                 $completeCategory['childrens'][] = $toChildrens;

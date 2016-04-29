@@ -7,24 +7,21 @@ use App\Http\Requests;
 use App\Exceptions\Handler;
 use App\City;
 
-class CitiesController extends Controller
-{
+class CitiesController extends Controller {
 
     /**
      * @api {get} /cities/:id getCities
      * @apiVersion 0.1.0
      * @apiName getCities
      * @apiGroup Cities
-     *
+     * 
      * @apiParam {integer} [id]
      */
-    public function index()
-    {
+    public function index() {
         return $this->helpReturn(City::all());
     }
-
-    public function show($id)
-    {
+    
+    public function show($id) {
         return $this->helpReturn(City::findorfail($id));
     }
 
@@ -33,14 +30,13 @@ class CitiesController extends Controller
      * @apiVersion 0.1.0
      * @apiName storeCities
      * @apiGroup Cities
-     *
+     * 
      * @apiParam {string} name
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $rules = array('name' => 'required');
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $city = new City;
             $city->name = $request->name;
             $city->save();
@@ -55,16 +51,15 @@ class CitiesController extends Controller
      * @apiVersion 0.1.0
      * @apiName updateCities
      * @apiGroup Cities
-     *
+     * 
      * @apiParam {string} name
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $rules = array('name' => 'required');
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $city = City::findorfail($id);
-            if ($city) {
+            if($city) {
                 $city->name = $request->name;
                 $city->save();
                 return $this->helpInfo();
@@ -79,11 +74,10 @@ class CitiesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 

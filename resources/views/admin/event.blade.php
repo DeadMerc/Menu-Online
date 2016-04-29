@@ -49,7 +49,7 @@
 
         <!--<div class="form-group"> {-- Form::label('shop_id', 'Заведение') --}
             {{-- Form::select('shop_id',$shops,null,array('class'=>'form-control','placeholder'=>'Shop_id')) --}}
-                </div>-->
+        </div>-->
         <div class="form-group">
             {!! Form::label('city_id', 'Город') !!}
             {!! Form::select('city_id',$cities,null,array('class'=>'form-control','placeholder'=>'City_id')) !!}

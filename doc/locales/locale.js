@@ -6,7 +6,7 @@ define([
     './locales/pt_br.js',
     './locales/ru.js',
     './locales/zh.js'
-], function () {
+], function() {
     var langId = (navigator.language || navigator.userLanguage).toLowerCase();
     var language = langId.substr(0, 2);
     var locales = {};
@@ -15,10 +15,10 @@ define([
         for (property in arguments[index])
             locales[property] = arguments[index][property];
     }
-    if (!locales['en'])
+    if ( ! locales['en'])
         locales['en'] = {};
 
-    if (!locales[langId] && !locales[language])
+    if ( ! locales[langId] && ! locales[language])
         language = 'en';
 
     var locale = (locales[langId] ? locales[langId] : locales[language]);
@@ -35,9 +35,9 @@ define([
     }
 
     return {
-        __: __,
-        locales: locales,
-        locale: locale,
+        __         : __,
+        locales    : locales,
+        locale     : locale,
         setLanguage: setLanguage
     };
 });

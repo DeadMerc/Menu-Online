@@ -12,7 +12,7 @@ class StatsTableSeeder extends Seeder
     public function run()
     {
         DB::table('stats')->insert([
-            'views' => 150
+            'views'=>150
         ]);
     }
 }

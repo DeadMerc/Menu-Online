@@ -21,14 +21,14 @@ class Shops extends Migration
             $table->string('time');
             $table->string('street');
             $table->string('url')->nullable();
-
+            
             $table->string('lat');
             $table->string('lon');
-
+                    
             $table->string('phone');
             $table->date('date_start');
             $table->date('date_stop');
-
+            
             $table->timestamps();
         });
     }

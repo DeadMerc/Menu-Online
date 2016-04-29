@@ -11,12 +11,10 @@ use App\Stat;
 use App\Shop;
 use Carbon\Carbon;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller {
 
-    public function index()
-    {
-
+    public function index() {
+        
         $counts['users'] = User::all();
         $counts['users'] = $counts['users']->count();
 
@@ -27,26 +25,26 @@ class AdminController extends Controller
         $counts['views'] = Stat::findorfail(1)->views;
         //count users every month
         $counts['line_users'] = array();
-        for ($i = 1; $i <= 12; $i++) {
+        for($i = 1; $i <= 12; $i++) {
             $now = Carbon::createFromDate(date("Y"), $i, 1);
             $counts['line_users'][$i] = User::where('created_at', '>=', $now->toDateTimeString())
-                ->where('created_at', '<=', $now->addMonth()->toDateTimeString())
-                ->get()
-                ->count();
+                    ->where('created_at', '<=', $now->addMonth()->toDateTimeString())
+                    ->get()
+                    ->count();
         }
 
         //уведомления
         $messages['stoped'] = [];
         $now = Carbon::now('Europe/Moscow');
         $i = 0;
-        foreach (Shop::where('date_stop', '<', $now->toDateString())->get() as $shop) {
+        foreach(Shop::where('date_stop', '<', $now->toDateString())->get() as $shop) {
             $messages['stoped'][$i]['title'] = $shop->title;
             $messages['stoped'][$i]['id'] = $shop->id;
             $shop_date_stop = Carbon::createFromFormat('Y-m-d', $shop->date_stop);
             $difference = $now->diffInHours($shop_date_stop);
             $messages['stoped'][$i]['ago_type'] = 'часов';
             $messages['stoped'][$i]['for_sort'] = $difference;
-            if ($difference > 100) {
+            if($difference > 100) {
                 $difference = $now->diffInDays($shop_date_stop);
                 $messages['stoped'][$i]['ago_type'] = 'дней';
             }
@@ -54,14 +52,14 @@ class AdminController extends Controller
             $messages['stoped'][$i]['ago'] = $difference;
             $i++;
         }
-        foreach (Event::where('date_stop', '<', $now->toDateString())->get() as $shop) {
+        foreach(Event::where('date_stop', '<', $now->toDateString())->get() as $shop) {
             $messages['stoped'][$i]['title'] = $shop->title;
             $messages['stoped'][$i]['id'] = $shop->id;
             $shop_date_stop = Carbon::createFromFormat('Y-m-d', $shop->date_stop);
             $difference = $now->diffInHours($shop_date_stop);
             $messages['stoped'][$i]['ago_type'] = 'часов';
             $messages['stoped'][$i]['for_sort'] = $difference;
-            if ($difference > 24) {
+            if($difference > 24) {
                 $difference = $now->diffInDays($shop_date_stop);
                 $messages['stoped'][$i]['ago_type'] = 'дней';
             }
@@ -69,8 +67,8 @@ class AdminController extends Controller
             $messages['stoped'][$i]['ago'] = $difference;
             $i++;
         }
-        usort($messages['stoped'], function ($a, $b) {
-            if ($a['for_sort'] > $b['for_sort']) {
+        usort($messages['stoped'], function($a, $b) {
+            if($a['for_sort'] > $b['for_sort']) {
                 return 1;
             } else {
                 return 0;
@@ -80,17 +78,17 @@ class AdminController extends Controller
         $now3d = clone $now;
         $now3d->addDays(7);
         $messages['remain'] = [];
-
-        foreach (Shop::where('date_stop', '>=', $now->toDateString())
-                     ->where('date_stop', '<=', $now3d->toDateString())
-                     ->get() as $shop) {
+        
+        foreach(Shop::where('date_stop', '>=', $now->toDateString())
+                ->where('date_stop', '<=', $now3d->toDateString())
+                ->get() as $shop) {
             $messages['remain'][$i]['title'] = $shop->title;
             $messages['remain'][$i]['id'] = $shop->id;
             $shop_date_stop = Carbon::createFromFormat('Y-m-d', $shop->date_stop);
             $difference = $now->diffInHours($shop_date_stop);
             $messages['remain'][$i]['ago_type'] = 'часов';
             $messages['remain'][$i]['for_sort'] = $difference;
-            if ($difference > 100) {
+            if($difference > 100) {
                 $difference = $now->diffInDays($shop_date_stop);
                 $messages['remain'][$i]['ago_type'] = 'дней';
             }

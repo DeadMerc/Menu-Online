@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test/push/ios', 'Controller@sendPushToIos');
+Route::get('/test/push/ios','Controller@sendPushToIos');
 
 
-Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), function () {
+Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), function() {
     Route::resource('cities', 'CitiesController');
     Route::resource('categories', 'CategoriesController');
     Route::get('categories/{id}/childrens', 'CategoriesController@childrens');
@@ -29,7 +29,7 @@ Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), functio
     Route::resource('events', 'EventsController');
     Route::post('categories/follow', 'CategoriesController@follow');
     Route::post('categories/unfollow', 'CategoriesController@unfollow');
-
+    
     Route::resource('users', 'UsersController');
 
     Route::resource('promos', 'PromosController');
@@ -39,7 +39,7 @@ Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), functio
     Route::resource('news', 'NewsController');
 });
 
-Route::group(array('prefix' => 'admin', 'middleware' => 'auth.verybasic'), function () {
+Route::group(array('prefix' => 'admin', 'middleware' => 'auth.verybasic'), function() {
     Route::get('/', 'AdminController@index');
     Route::get('/shops', 'ShopsController@showAll');
     Route::get('/shop/{id?}', 'ShopsController@edit');
@@ -65,8 +65,8 @@ Route::group(array('prefix' => 'admin', 'middleware' => 'auth.verybasic'), funct
 
 Route::get('images/{filename}', function ($filename) {
     $path = storage_path() . '/app/public/images/' . $filename;
-    if (file_exists($path)) {
-        if ($filename == 'snif.jpg') {
+    if(file_exists($path)) {
+        if($filename == 'snif.jpg'){
             $stat = new \App\Stat;
             //$stat->id = 2;
             //$stat = \App\Stat::find(2);
@@ -78,8 +78,8 @@ Route::get('images/{filename}', function ($filename) {
         $type = File::mimeType($path);
         $response = Response::make($file, 200);
         $response->header("Content-Type", $type);
-    } else {
-        $response = array('error' => true, 'message' => 'not found image');
+    }else{
+        $response = array('error'=>true,'message'=>'not found image');
     }
 
 

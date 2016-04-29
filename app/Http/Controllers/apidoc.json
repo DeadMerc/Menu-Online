@@ -1,11 +1,11 @@
 {
-  "name": "CityReviews",
-  "version": "0.1.2",
-  "description": "RestFull api docs",
-  "title": "Api docs",
-  "url": "http://menu.frameapp.com.ua/api",
-  "sampleUrl": "http://menu.frameapp.com.ua/api",
-  "order": [
-    "importantInformation"
-  ]
+    "name": "CityReviews",
+    "version": "0.1.2",
+    "description": "RestFull api docs",
+    "title": "Api docs",
+    "url": "http://menu.frameapp.com.ua/api",
+    "sampleUrl": "http://menu.frameapp.com.ua/api",
+    "order":[
+        "importantInformation"
+    ]
 }

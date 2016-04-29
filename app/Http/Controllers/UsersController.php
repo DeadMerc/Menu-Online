@@ -6,16 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
-class UsersController extends Controller
-{
+class UsersController extends Controller {
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return $this->helpError('Access denied');
         //return $this->helpReturn(User::all());
     }
@@ -25,8 +23,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,24 +32,23 @@ class UsersController extends Controller
      * @apiVersion 0.1.0
      * @apiName storeUsers
      * @apiGroup Users
-     *
+     * 
      * @apiParam {string} type android/ios
      * @apiParam {string} token
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $rules = array('type' => 'required', 'token' => 'required');
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $find = User::where('deviceType', '=', $request->type)
-                ->where('deviceToken', '=', $request->token)->first();
-            if (!$find) {
+                            ->where('deviceToken', '=', $request->token)->first();
+            if(!$find) {
                 $user = new User;
                 $user->deviceType = $request->type;
                 $user->deviceToken = $request->token;
                 $user->save();
                 return $this->helpInfo($user->id);
-            } else {
+            }else{
                 return $this->helpInfo($find->id);
             }
         } else {
@@ -65,21 +61,19 @@ class UsersController extends Controller
      * @apiVersion 0.1.0
      * @apiName getUsers
      * @apiGroup Users
-     *
+     * 
      */
-    public function show($id)
-    {
+    public function show($id) {
         return $this->helpReturn(User::findorfail($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -88,17 +82,16 @@ class UsersController extends Controller
      * @apiVersion 0.1.0
      * @apiName storeUsers
      * @apiGroup Users
-     *
+     * 
      * @apiParam {string} type android/ios
      * @apiParam {string} token
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $rules = array('type' => 'required', 'token' => 'required');
         $valid = Validator($request->all(), $rules);
-        if (!$valid->fails()) {
+        if(!$valid->fails()) {
             $user = User::findorfail($id);
-            if ($user) {
+            if($user) {
                 $user->deviceType = $request->type;
                 $user->deviceToken = $request->token;
                 return $this->helpInfo();
@@ -113,11 +106,10 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 

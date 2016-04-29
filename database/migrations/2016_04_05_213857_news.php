@@ -21,8 +21,8 @@ class News extends Migration
             $table->datetime('date');
             //$table->string('publish');
             $table->timestamps();
-
-
+            
+            
         });
     }
 

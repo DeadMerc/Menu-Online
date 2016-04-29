@@ -12,7 +12,7 @@ class Stats extends Migration
      */
     public function up()
     {
-        Schema::create('stats', function (Blueprint $table) {
+        Schema::create('stats',function(Blueprint $table){
             $table->increments('id');
             $table->integer('views');
             $table->timestamps();

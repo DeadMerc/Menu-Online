@@ -8,6 +8,6 @@ class Photo extends Model
 {
     protected $table = 'photos';
     public $timestamps = false;
-
-
+    
+    
 }
