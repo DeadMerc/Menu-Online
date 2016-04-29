@@ -1,0 +1,1344 @@
+[
+  {
+    "type": "post",
+    "url": "/categories/follow",
+    "title": "followCategory",
+    "version": "0.1.0",
+    "name": "followCategory",
+    "group": "Categories",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/follow"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/categories/:id",
+    "title": "getCategories",
+    "version": "0.1.1",
+    "name": "getCategories",
+    "group": "Categories",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/categories/:id/childrens",
+    "title": "getСhildrenCategories",
+    "version": "0.1.3",
+    "name": "get_hildrenCategories",
+    "group": "Categories",
+    "description": "<p>получить под категорий по родительской</p> ",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/:id/childrens"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/categories",
+    "title": "storeCategories",
+    "version": "0.1.0",
+    "name": "storeCategories",
+    "group": "Categories",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "parent_id",
+            "description": "<p>id Родительской категории</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/categories/unfollow",
+    "title": "unfollowCategory",
+    "version": "0.1.0",
+    "name": "unfollowCategory",
+    "group": "Categories",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/unfollow"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/categories/:id",
+    "title": "updateCategories",
+    "version": "0.1.0",
+    "name": "updateCategories",
+    "group": "Categories",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "parent_id",
+            "description": "<p>id Родительской категории</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/cities/:id",
+    "title": "getCities",
+    "version": "0.1.0",
+    "name": "getCities",
+    "group": "Cities",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CitiesController.php",
+    "groupTitle": "Cities",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/cities/:id"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/cities",
+    "title": "storeCities",
+    "version": "0.1.0",
+    "name": "storeCities",
+    "group": "Cities",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CitiesController.php",
+    "groupTitle": "Cities",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/cities"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/cities/:id",
+    "title": "updateCities",
+    "version": "0.1.0",
+    "name": "updateCities",
+    "group": "Cities",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CitiesController.php",
+    "groupTitle": "Cities",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/cities/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/events/:id",
+    "title": "getEvents",
+    "version": "0.1.1",
+    "name": "getEvents",
+    "group": "Events",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./EventsController.php",
+    "groupTitle": "Events",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/events/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/categories/:id/events",
+    "title": "getEventsByCategory",
+    "version": "0.1.0",
+    "name": "getEventsByCategory",
+    "group": "Events",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Events",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/:id/events"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/events/",
+    "title": "storeEvents",
+    "version": "0.1.0",
+    "name": "storeEvents",
+    "group": "Events",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "dateStart",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "dateStop",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "publish",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./EventsController.php",
+    "groupTitle": "Events",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/events/"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/events/:id",
+    "title": "updateEvents",
+    "version": "0.1.0",
+    "name": "updateEvents",
+    "group": "Events",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "dateStart",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "dateStop",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "publish",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./EventsController.php",
+    "groupTitle": "Events",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/events/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/news/:id",
+    "title": "getNews",
+    "version": "0.1.0",
+    "name": "getNews",
+    "group": "News",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integr",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./NewsController.php",
+    "groupTitle": "News",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/news/:id"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/news/:id",
+    "title": "storeNews",
+    "version": "0.1.0",
+    "name": "storeNews",
+    "group": "News",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integr</p> ",
+            "optional": false,
+            "field": "city_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "date",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./NewsController.php",
+    "groupTitle": "News",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/news/:id"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/news/:id",
+    "title": "updateNews",
+    "version": "0.1.0",
+    "name": "updateNews",
+    "group": "News",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "city_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "description",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "date",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./NewsController.php",
+    "groupTitle": "News",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/news/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/promos/:id",
+    "title": "getPromos",
+    "version": "0.1.0",
+    "name": "getPromos",
+    "group": "Promos",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./PromosController.php",
+    "groupTitle": "Promos",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/promos/:id"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/promos",
+    "title": "storePromos",
+    "version": "0.1.0",
+    "name": "storePromos",
+    "group": "Promos",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": true,
+            "field": "shop_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": true,
+            "field": "url",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./PromosController.php",
+    "groupTitle": "Promos",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/promos"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/promos",
+    "title": "updatePromos",
+    "version": "0.1.0",
+    "name": "updatePromos",
+    "group": "Promos",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": true,
+            "field": "shop_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": true,
+            "field": "url",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./PromosController.php",
+    "groupTitle": "Promos",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/promos"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/reviews/:id",
+    "title": "getReview",
+    "version": "0.1.1",
+    "name": "getReview",
+    "group": "Reviews",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./ReviewsController.php",
+    "groupTitle": "Reviews",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/reviews/:id"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/reviews",
+    "title": "storeReview",
+    "version": "0.1.0",
+    "name": "storeReview",
+    "group": "Reviews",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "phone",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "rating",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "shop_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "review",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./ReviewsController.php",
+    "groupTitle": "Reviews",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/reviews"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/reviews/:id",
+    "title": "storeReview",
+    "version": "0.1.0",
+    "name": "storeReview",
+    "group": "Reviews",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integr</p> ",
+            "optional": false,
+            "field": "id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "name",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "phone",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "rating",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "shop_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "review",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./ReviewsController.php",
+    "groupTitle": "Reviews",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/reviews/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/shops/:id",
+    "title": "getShops",
+    "version": "0.1.1",
+    "name": "getShops",
+    "group": "Shops",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integr",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": true,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./ShopsController.php",
+    "groupTitle": "Shops",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/shops/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/categories/:id/shops",
+    "title": "getShopsByCategory",
+    "version": "0.1.0",
+    "name": "getShopsByCategory",
+    "group": "Shops",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": false,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Shops",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/:id/shops"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/shops",
+    "title": "storeShops",
+    "version": "0.1.0",
+    "name": "storeShops",
+    "group": "Shops",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "city_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "time",
+            "description": "<p>В какое время работает</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "street",
+            "description": "<p>Улица</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "lat",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "lon",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "url",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "date_start",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "date_stop",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./ShopsController.php",
+    "groupTitle": "Shops",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/shops"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/shops/:id",
+    "title": "updateShops",
+    "version": "0.1.0",
+    "name": "updateShops",
+    "group": "Shops",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "city_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "time",
+            "description": "<p>В какое время работает</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "street",
+            "description": "<p>Улица</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "lat",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "lon",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "url",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "date_start",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>datetime</p> ",
+            "optional": false,
+            "field": "date_stop",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>file</p> ",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./ShopsController.php",
+    "groupTitle": "Shops",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/shops/:id"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "/users/:id",
+    "title": "getUsers",
+    "version": "0.1.0",
+    "name": "getUsers",
+    "group": "Users",
+    "filename": "./UsersController.php",
+    "groupTitle": "Users",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/users/:id"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/users",
+    "title": "storeUsers",
+    "version": "0.1.0",
+    "name": "storeUsers",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>android/ios</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "token",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./UsersController.php",
+    "groupTitle": "Users",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/users"
+      }
+    ]
+  },
+  {
+    "type": "put",
+    "url": "/users",
+    "title": "storeUsers",
+    "version": "0.1.0",
+    "name": "storeUsers",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "type",
+            "description": "<p>android/ios</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "token",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./UsersController.php",
+    "groupTitle": "Users",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/users"
+      }
+    ]
+  },
+  {
+    "type": "none",
+    "url": "/none",
+    "title": "ВАЖНАЯ ИНФА",
+    "version": "0.1.0",
+    "name": "importantInformation",
+    "group": "importantInformation",
+    "description": "<p>Акции -&gt; Events,Cобытия -&gt; News</p> ",
+    "filename": "./EventsController.php",
+    "groupTitle": "importantInformation",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/none"
+      }
+    ]
+  }
+]
