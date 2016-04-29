@@ -24,6 +24,7 @@ Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), functio
     Route::get('categories/{id}/childrens', 'CategoriesController@childrens');
     Route::get('categories/{id}/events', 'CategoriesController@events');
     Route::get('categories/{id}/shops', 'CategoriesController@shops');
+    Route::get('categories/{id}/shops_global', 'CategoriesController@shops_global');
 
     Route::resource('shops', 'ShopsController');
     Route::resource('events', 'EventsController');

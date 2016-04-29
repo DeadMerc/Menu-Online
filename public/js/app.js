@@ -28,7 +28,7 @@ function getChildCategory(category) {
 //to select
 function getShopsByCategoryToSelect(category) {
     //console.log(category.val());
-    $.get('/api/categories/' + category.val() + '/shops', function (res) {
+    $.get('/api/categories/' + category.val() + '/shops_global', function (res) {
         //console.log(res);
         $(".shops").html('<option selected disabled>Ожидайте ответа сервера</option>');
         if (res.response.length === 0) {

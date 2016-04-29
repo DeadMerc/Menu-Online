@@ -145,7 +145,18 @@ class CategoriesController extends Controller {
         } else {
             $shops = Category::findorfail($id)->shops;
         }
-        
+
+        return $this->helpReturn($shops);
+    }
+    
+    public function shops_global(Request $request, $id){
+        $shops = [];
+        //print_r($shops);
+        foreach (Category::findorfail($id)->childrens as $category){
+            foreach ($category->shops as $shop){
+                $shops[] = $shop;
+            }
+        }
         return $this->helpReturn($shops);
     }
 

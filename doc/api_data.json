@@ -38,9 +38,22 @@
     "type": "get",
     "url": "/categories/:id",
     "title": "getCategories",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "name": "getCategories",
     "group": "Categories",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -66,10 +79,30 @@
     "type": "get",
     "url": "/categories/:id/childrens",
     "title": "getСhildrenCategories",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "name": "get_hildrenCategories",
     "group": "Categories",
     "description": "<p>получить под категорий по родительской</p> ",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -130,6 +163,41 @@
     "sampleRequest": [
       {
         "url": "http://menu.frameapp.com.ua/api/categories"
+      }
+    ]
+  },
+  {
+    "type": "post",
+    "url": "/categories/unfollow",
+    "title": "unfollowCategory",
+    "version": "0.1.0",
+    "name": "unfollowCategory",
+    "group": "Categories",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>integer</p> ",
+            "optional": false,
+            "field": "category_id",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "filename": "./CategoriesController.php",
+    "groupTitle": "Categories",
+    "sampleRequest": [
+      {
+        "url": "http://menu.frameapp.com.ua/api/categories/unfollow"
       }
     ]
   },
@@ -1037,6 +1105,13 @@
           },
           {
             "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "url",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
             "type": "<p>datetime</p> ",
             "optional": false,
             "field": "date_start",
@@ -1124,6 +1199,13 @@
             "type": "<p>string</p> ",
             "optional": false,
             "field": "lon",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>string</p> ",
+            "optional": false,
+            "field": "url",
             "description": ""
           },
           {
