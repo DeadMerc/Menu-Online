@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Category;
+
 class Controller extends BaseController {
 
     use AuthorizesRequests,
@@ -14,7 +16,7 @@ class Controller extends BaseController {
         ValidatesRequests;
 
     public function helpError($message, $validator = false) {
-        
+
         if($validator) {
             return array('response' => [], 'error' => true, 'message' => $message, 'validator' => $validator->errors()->all());
         }
@@ -37,7 +39,7 @@ class Controller extends BaseController {
 
         return $arrayForResponse;
     }
-    
+
     public static function helpReturnS($response, $info = false, $message = false) {
         $arrayForResponse['response'] = $response;
         if($info) {
@@ -69,7 +71,6 @@ class Controller extends BaseController {
      * @message arrray message,type,id
      */
     public function sendPushToAndroid(array $device_ids, $message = false) {
-        define('API_ACCESS_KEY', 'AIzaSyCJb8kzYjf6vTu1gyet0ZS_4v4MoiaqVEA');
         if(!$message) {
             $message = array
                 (
@@ -82,12 +83,6 @@ class Controller extends BaseController {
                 'largeIcon' => 'large_icon',
                 'smallIcon' => 'small_icon'
             );
-        } else {
-            $message = array
-                (
-                'message' => $message['message'],
-                'image' => $message['image']
-            );
         }
 
         $fields = array
@@ -97,7 +92,7 @@ class Controller extends BaseController {
         );
         $headers = array
             (
-            'Authorization: key=' . API_ACCESS_KEY,
+            'Authorization: key=AIzaSyCJb8kzYjf6vTu1gyet0ZS_4v4MoiaqVEA',
             'Content-Type: application/json'
         );
         $ch = curl_init();
@@ -113,9 +108,45 @@ class Controller extends BaseController {
         return $result;
     }
 
-    public function sendPushToIos($device_ids, $message) {
-        return 'Now not work';
+    public function sendPushToIos($device_ids = false, $message = false) {
+        $tHost = 'gateway.push.apple.com';
+        $tPort = 2195;
+        $errors = false;
+        $tCert = storage_path() . '/app/cert.pem';
+        $tPassphrase = '';
+        //$tToken = '0a32cbcc8464ec05ac3389429813119b6febca1cd567939b2f54892cd1dcb134';
+        $tToken = $device_ids;
+        $tAlert = 'Alert';
+        $tBadge = 8;
+        $tSound = 'default';
+        $tPayload = 'Payload';
+        $tBody['aps'] = array(
+            'alert' => $tAlert,
+            'badge' => $tBadge,
+            'sound' => $tSound,
+        );
+        $tBody ['payload'] = $tPayload;
+        $tBody = json_encode($tBody);
+        $tContext = stream_context_create();
+        stream_context_set_option($tContext, 'ssl', 'local_cert', $tCert);
+        stream_context_set_option($tContext, 'ssl', 'passphrase', $tPassphrase);
+        $tSocket = stream_socket_client('ssl://' . $tHost . ':' . $tPort, $error, $errstr, 30, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $tContext);
+        if(!$tSocket)
+            $errors = 'Cant open socket';
+        $tMsg = chr(0) . chr(0) . chr(32) . pack('H*', $tToken) . pack('n', strlen($tBody)) . $tBody;
+        $tResult = fwrite($tSocket, $tMsg, strlen($tMsg));
+        if($tResult)
+            $errors = false;
+        else
+            $errors = $tResult;
+        fclose($tSocket);
+        return $errors;
     }
+
+    /*
+     * @param user user collection
+     * @param message array=message,image
+     */
 
     public function sendPushToUser($user, $message) {
         if($user->deviceType == 'android') {
@@ -126,6 +157,22 @@ class Controller extends BaseController {
             $response = false;
         }
         return $response;
+    }
+    
+    public function getCategoriesForHtml() {
+        $mainCategories = [];
+        foreach(Category::where('parent_id','=','0')->get() as $category){
+            $completeCategory = null;
+            $completeCategory['main']['id'] = $category->id;
+            $completeCategory['main']['name'] = $category->name;
+            foreach(Category::where('parent_id','=',$category->id)->get() as $children) {
+                $toChildrens['id'] = $children->id;
+                $toChildrens['name'] = $children->name;
+                $completeCategory['childrens'][] = $toChildrens;
+            }
+            $mainCategories[] = $completeCategory;
+        }
+        return $mainCategories;
     }
 
 }

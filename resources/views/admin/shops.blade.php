@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('mainRows')
-    @parent
+@parent
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
     <div class="row">
         <ol class="breadcrumb">
@@ -16,6 +16,30 @@
     </div><!--/.row-->
 
     <div class="row mainRow">
+
+        <script>
+
+        </script>
+
+        <div class="form-group">
+            <label for="sel1">Выберите категорию</label>
+            <select onchange="getShopsByCategory($(this));" class="form-control" >
+                <option disabled selected>-- Выберите --</option>
+                <?php
+                //var_dump($categories);
+                ?>
+                @foreach($categories as $category)
+                <optgroup label="{{$category['main']['name']}}">
+                    @if(isset($category['childrens']))
+                        @foreach($category['childrens'] as $children)
+                        <option value="{{$children['id']}}">{{$children['name']}}</option>
+                        @endforeach
+                    @endif
+                @endforeach
+            </select>
+        </div>
+
+
         <table id="example" class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -31,7 +55,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="shops">
 
                 <?php
                 //var_dump($shops);die;
@@ -43,9 +67,9 @@
                     @if(1 != 1)
                     <td><img height="100px" width="300px" src="/images/{{$item->photos[0]->image }}"></td>
                     @else
-                         <td>Временно недоступно</td>
+                    <td>Временно недоступно</td>
                     @endif
-                    
+
                     <td>{{ $item->city->name or 'Связь нарушена' }}</td>
                     <td>{{ $item->title }}</td>
                     <td >

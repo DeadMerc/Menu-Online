@@ -21,23 +21,26 @@ class StatsMiddleware {
         $stats = Stat::find(1);
         $stats->views++;
         $stats->save();
-
+        /*
         $req = md5($request->fullUrl());
         if(Cache::store('database')->has($req) AND $request->isMethod('get') AND $request->header('cache') != 'false') {
             $controller = new Controller;
             return response(Cache::store('database')->get($req),200,
                                 ['Content-Type'=>'application/json',
                                     'from-cache'=>true]);
-        }
+        }*/
         return $next($request);
     }
     
     public function terminate($request,$response) {
+        /*
         $req = md5($request->fullUrl());
         if(!Cache::store('database')->has($req) AND $request->isMethod('get')) {
             $expiresAt = Carbon::now()->addMinutes(10);
             //var_dump($response->getContent());
             Cache::store('database')->put($req, $response->getContent(), $expiresAt);
         }
+         * 
+         */
     }
 }

@@ -15,10 +15,11 @@ class CategoriesController extends Controller {
 
     /**
      * @api {get} /categories/:id getCategories
-     * @apiVersion 0.1.0
+     * @apiVersion 0.1.1
      * @apiName getCategories
      * @apiGroup Categories
      * 
+     * @apiHeader {integer} [city_id]
      * @apiParam {integer} [id]
      */
     public function index() {
@@ -27,8 +28,8 @@ class CategoriesController extends Controller {
 
     public function showAll() {
         $shops = Category::all();
-
-        return view('admin.categories', array('categories' => $shops));
+        
+        return view('admin.categories', array('categories' => $shops,'categoriesList'=>  $this->getCategoriesForHtml()));
     }
 
     /**
@@ -88,12 +89,13 @@ class CategoriesController extends Controller {
 
     /**
      * @api {get} /categories/:id/childrens getСhildrenCategories
-     * @apiVersion 0.1.2
+     * @apiVersion 0.1.3
      * @apiName getСhildrenCategories
      * @apiGroup Categories
      * @apiDescription получить под категорий по родительской
      * 
      * @apiHeader {integer} [user_id]
+     * @apiHeader {integer} [city_id]
      * @apiParam {integer} id
      */
     public function childrens(Request $request, $id) {

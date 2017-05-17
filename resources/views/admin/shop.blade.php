@@ -21,9 +21,23 @@
         @else
         {!! Form::open(['id'=>'shopTableAdd','method' => 'POST', 'action' => 'ShopsController@store']) !!}
         @endif
+        
         <div class="form-group">
-            {!! Form::label('category_id', 'Категория') !!}
-            {!! Form::select('category_id',$categories,null,['class'=>'form-control','placeholder'=>'Category_id']) !!}
+            <label for="sel1">Выберите категорию</label>
+            <select name="category_id" class="form-control" >
+                <option disabled selected>-- Выберите --</option>
+                <?php
+                //var_dump($categories);
+                ?>
+                @foreach($categories as $category)
+                <optgroup label="{{$category['main']['name']}}">
+                    @if(isset($category['childrens']))
+                        @foreach($category['childrens'] as $children)
+                        <option value="{{$children['id']}}">{{$children['name']}}</option>
+                        @endforeach
+                    @endif
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             {!! Form::label('city_id', 'Город') !!}

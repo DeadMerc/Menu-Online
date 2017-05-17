@@ -51,10 +51,7 @@ class ShopsController extends Controller {
         foreach(City::all() as $city) {
             $cities[$city->id] = $city->name;
         }
-        $categories = [];
-        foreach(Category::all() as $category) {
-            $categories[$category->id] = $category->name;
-        }
+        
 
         if($id) {
             $data = array('item' => Shop::findorfail($id));
@@ -62,7 +59,7 @@ class ShopsController extends Controller {
             $data = array('item' => '');
         }
         $data['cities'] = $cities;
-        $data['categories'] = $categories;
+        $data['categories'] = $this->getCategoriesForHtml();
         return view('admin.shop', $data);
     }
 
@@ -200,8 +197,21 @@ class ShopsController extends Controller {
 
     public function showAll() {
         $shops = Shop::with('photos')->get();
-
-        return view('admin.shops', array('shops' => $shops));
+        
+        foreach(Category::where('parent_id','=','0')->get() as $category){
+            $completeCategory = null;
+            $completeCategory['main']['id'] = $category->id;
+            $completeCategory['main']['name'] = $category->name;
+            foreach(Category::where('parent_id','=',$category->id)->get() as $children) {
+                $toChildrens['id'] = $children->id;
+                $toChildrens['name'] = $children->name;
+                $completeCategory['childrens'][] = $toChildrens;
+            }
+            $mainCategories[] = $completeCategory;
+        } 
+        
+        //print_r($mainCategories);
+        return view('admin.shops', array('shops' => $shops,'categories'=>$mainCategories));
     }
 
     /**

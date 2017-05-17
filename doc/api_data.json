@@ -38,9 +38,22 @@
     "type": "get",
     "url": "/categories/:id",
     "title": "getCategories",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "name": "getCategories",
     "group": "Categories",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
+            "description": ""
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -66,7 +79,7 @@
     "type": "get",
     "url": "/categories/:id/childrens",
     "title": "getСhildrenCategories",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "name": "get_hildrenCategories",
     "group": "Categories",
     "description": "<p>получить под категорий по родительской</p> ",
@@ -78,6 +91,13 @@
             "type": "integer",
             "optional": true,
             "field": "user_id",
+            "description": ""
+          },
+          {
+            "group": "Header",
+            "type": "integer",
+            "optional": true,
+            "field": "city_id",
             "description": ""
           }
         ]

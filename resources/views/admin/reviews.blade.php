@@ -32,9 +32,9 @@
                 @foreach($reviews as $item)
                 <tr>
                     <td>{{ $item->id }} </td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->review }}</td>
+                    <td>{{ str_limit($item->name, 30,'...') }}</td>
+                    <td>{{ str_limit($item->phone, 30,'...') }}</td>
+                    <td>{{ str_limit($item->review, 30,'...') }}</td>
                     <td >
                         @if($item->publish == 0)
                             <a style="float:left;" class="btn btn-info publish{{$item->id}}" onclick="reviewPublish({{$item->id}})">Опубликовать</a>

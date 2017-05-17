@@ -9,7 +9,9 @@
         <link href="/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/datepicker3.css" rel="stylesheet">
         <link href="/css/styles.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.formstyler/1.7.4/jquery.formstyler.css">
+        
+        
         <!--Icons-->
         <script src="/js/lumino.glyphs.js"></script>
 
@@ -186,7 +188,7 @@
         <script src="/js/bootstrap-datepicker.js"></script>-->
         <script src="/js/dataTables.bootstrap.min.js"></script>
         <script src="/js/dataTables.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/jquery.formstyler/1.7.4/jquery.formstyler.min.js"></script>
         <script src="/js/app.js"></script>
         <script>
             $('#calendar').datepicker({
@@ -212,6 +214,8 @@
             function Table() {
                 //$("#example1").DataTable();
                 hideLoader();
+                /*
+                
                 $('#example').DataTable({
                     "paging": true,
                     "lengthChange": false,
@@ -219,7 +223,7 @@
                     "ordering": true,
                     "retrieve": true,
                     "autoWidth": false
-                });
+                });*/
             }
             ;
             function hideLoader() {

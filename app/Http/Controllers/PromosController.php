@@ -123,6 +123,7 @@ class PromosController extends Controller {
                 $promo->shop_id = $request->shop_id;
                 $promo->url = $request->url;
                 $promo->city_id = $request->city_id;
+                $promo->save();
                 return $this->helpInfo();
             } else {
                 return $this->helpError('not found resource');

@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test/push/ios','Controller@sendPushToIos');
+
 
 Route::group(array('prefix' => 'api', 'middleware' => ['stats', 'api']), function() {
     Route::resource('cities', 'CitiesController');

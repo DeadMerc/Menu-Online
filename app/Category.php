@@ -11,7 +11,7 @@ class Category extends Model {
     protected $appends = array('count_childrens_category', 'count_shops_in_category');
 
     public function shops() {
-        return $this->hasMany('App\Shop', 'category_id')->with('photos')->with('category');
+        return $this->hasMany('App\Shop', 'category_id')->with('photos')->with('category')->with('city');
     }
 
     public function childrens() {

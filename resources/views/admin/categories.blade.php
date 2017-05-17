@@ -6,19 +6,37 @@
             
         </ol>
     </div><!--/.row-->
-
+    
     <div class="row mainRow">
+        <div class="form-group">
+            <label for="sel1">Выберите категорию</label>
+            <select onchange="getCategoriesByCategory($(this));" class="form-control" >
+                <option value="0">Главные</option>
+                <?php
+                //var_dump($categories);
+                ?>
+                @foreach($categoriesList as $category)
+                <option value="{{$category['main']['id']}}">{{$category['main']['name']}}</option>
+                    @if(isset($category['childrens']))
+                        @foreach($category['childrens'] as $children)
+                        <option style="padding-left: 15px;" value="{{$children['id']}}">{{$children['name']}}</option>
+                        @endforeach
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        
+        
         <table id="example" class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <td>id</td>
                     <td>Image</td>
-                    <td>Parent</td>
                     <td>Name</td>
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="categories">
 
                 <?php
                 //print_r($shops);
@@ -27,7 +45,6 @@
                 <tr>
                     <td>{{ $item->id }} </td>
                     <td><img height="100px" width="300px" src="/images/{{$item->image }}"></td>
-                    <td>{{ $item->parents->name or 'Связь потеряна' }}</td>
                     <td>{{ $item->name }}</td>
                     
                     <td >

@@ -102,6 +102,7 @@ class EventsController extends Controller {
             foreach($users as $user) {
                 $message['message'] = $request->title;
                 $message['image'] = $event->image;
+                $message['shop_id'] = $event->shop_id;
                 $debug[] = $this->sendPushToUser(User::findorfail($user->user_id), $message);
             }
 

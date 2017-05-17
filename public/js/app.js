@@ -5,6 +5,91 @@ $(".btn-danger").click(function(event){
     }
 });
 
+function getChildCategory(category){
+    //console.log(category.val());
+    $.get('/api/categories/'+category.val()+'/childrens',function(res){
+        //console.log(res);
+        $(".childCategories").html('<option selected disabled>Ожидайте ответа сервера</option>');
+        if(res.response.length === 0){
+            showSuccess('Данные по запросу не найдены');
+        }else if(res.error !== false){
+            showDanger('Непредвиденная ошибка');
+        }else{
+            var options = '<option selected disabled>Выберите подкатегорию</option>';
+            $.each(res.response,function(i,v){
+                options += '<option value="'+v.id+'">'+v.name+'</option> ';
+            });
+            $(".childCategories").html(options);
+        }
+    });
+}
+
+
+
+function getShopsByCategory(category){
+    //console.log(category.val());
+    $.get('/api/categories/'+category.val()+'/shops',function(res){
+        console.log(res);
+        //$(".childCategories").html('<option selected disabled>Ожидайте ответа сервера</option>');
+        if(res.response.length === 0){
+            showSuccess('Данные по запросу не найдены');
+        }else if(res.error !== false){
+            showDanger('Непредвиденная ошибка');
+        }else{
+            var shops = '';
+            $.each(res.response,function(i,v){
+                shops += '<tr role="row" class="odd">\n\
+                    <td class="sorting_1">'+v.id+'</td>\n\
+                    <td>'+v.category.name+'</td>\n\
+                    <td>Временно недоступно</td>\n\
+                    <td>'+v.city.name+'</td>\n\
+                    <td>'+v.title+'</td>\n\
+                    <td>\n\
+                        <a style="float: left" href="/admin/shop/'+v.id+'" class="btn btn-info">Редактировать</a>\n\
+                        <form method="POST" action="/api/shops/'+v.id+'" accept-charset="UTF-8" style="float:left;"><input name="_method" type="hidden" value="DELETE">\n\
+                        <input name="id" type="hidden" value="'+v.id+'">\n\
+                        <input class="btn btn-danger" =""="" type="submit" value="Удалить">\n\
+                        </form>\n\
+                    </td>\n\
+                </tr>';
+            });
+            $(".shops").html(shops);
+        }
+        Table();
+    });
+}
+
+function getCategoriesByCategory(category){
+    //console.log(category.val());
+    $.get('/api/categories/'+category.val()+'/childrens',function(res){
+        console.log(res);
+        //$(".childCategories").html('<option selected disabled>Ожидайте ответа сервера</option>');
+        if(res.response.length === 0){
+            showSuccess('Данные по запросу не найдены');
+        }else if(res.error !== false){
+            showDanger('Непредвиденная ошибка');
+        }else{
+            var shops = '';
+            $.each(res.response,function(i,v){
+                shops += '<tr>\n\
+                    <td>'+v.id+'</td>\n\
+                    <td><img height="100px" width="300px" src="/images/'+v.image+'"></td>\n\
+                    <td>'+v.name+'</td>\n\
+                    <td>\n\
+                        <a style="float: left" href="/admin/category/'+v.id+'" class="btn btn-info">Редактировать</a>\n\
+                        <form method="POST" action="/api/categories/'+v.id+'" accept-charset="UTF-8" style="float:left;"><input name="_method" type="hidden" value="DELETE">\n\
+                        <input name="id" type="hidden" value="'+v.id+'">\n\
+                        <input class="btn btn-danger" =""="" type="submit" value="Удалить">\n\
+                        </form>\n\
+                    </td>\n\
+                </tr>';
+            });
+            $(".categories").html(shops);
+        }
+        Table();
+    });
+}
+
 
 $("#shopTableAdd").submit(function (event) {
     event.preventDefault();
